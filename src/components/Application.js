@@ -1,10 +1,48 @@
 import React, { useState } from 'react';
 
-// CSS
 import 'components/Application.scss';
 
-// child components
 import DayList from 'components/DayList';
+import Appointment from './Appointment';
+
+const appointments = [
+  {
+    id: 1,
+    time: '12pm',
+  },
+  {
+    id: 2,
+    time: '1pm',
+    interview: {
+      student: 'Lydia Miller-Jones',
+      interviewer: {
+        id: 1,
+        name: 'Sylvia Palmer',
+        avatar: 'https://i.imgur.com/LpaY82x.png',
+      },
+    },
+  },
+  {
+    id: 3,
+    time: '2pm',
+  },
+  {
+    id: 4,
+    time: '3pm',
+    interview: {
+      student: 'Lydia Miller-Jones',
+      interviewer: {
+        id: 1,
+        name: 'Sylvia Palmer',
+        avatar: 'https://i.imgur.com/LpaY82x.png',
+      },
+    },
+  },
+  {
+    id: 5,
+    time: '4pm',
+  },
+];
 
 export default function Application(props) {
   // fake data - would be from an API request
@@ -29,6 +67,13 @@ export default function Application(props) {
   // create state hooks for currently selected day
   const [day, setDay] = useState('Monday');
 
+  const appointmentList = appointments.map((element, index) => {
+    if (index === appointments.length - 1) {
+      return <Appointment key='last' id='last' time={element.time} interview={element.interview} />;
+    }
+    return <Appointment key={index} {...element} />;
+  });
+
   return (
     <main className='layout'>
       <section className='sidebar'>
@@ -39,7 +84,7 @@ export default function Application(props) {
         </nav>
         <img className='sidebar__lhl sidebar--centered' src='images/lhl.png' alt='Lighthouse Labs' />
       </section>
-      <section className='schedule'>{/* Replace this with the schedule elements durint the "The Scheduler" activity. */}</section>
+      <section className='schedule'>{appointmentList}</section>
     </main>
   );
 }
