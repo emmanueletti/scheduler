@@ -3,6 +3,12 @@ import React, { useState } from 'react';
 import InterviewerList from 'components/InterviewerList';
 import Button from 'components/Button';
 
+// PROPS
+// interviewers: OBJ
+// interview: STR
+// onCancel: Fn ref ("back")
+
+
 const Form = (props) => {
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [name, setName] = useState(props.name || '');
@@ -26,8 +32,9 @@ const Form = (props) => {
   };
 
   const saveBtnHandleClick = () => {
-    setName(name);
+    props.onSave(name, interviewer)
   };
+
   return (
     <main className='appointment__card appointment__card--create'>
       <section className='appointment__card-left'>
