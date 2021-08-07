@@ -24,7 +24,8 @@ const Appointment = (props) => {
   const ERROR_DELETE = 'ERROR_DELETE'
   const ERROR_SAVE = 'ERROR_SAVE'
 
-  const {mode, transition, back} = useVisualMode(props.interview ? SHOW : EMPTY)
+  console.log('1', props.interview)
+  const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY);
 
   
   function save(name, interviewer) {
@@ -51,7 +52,8 @@ const Appointment = (props) => {
     transition(CONFIRM)
   }
 
-
+  console.log('2 appointment: ', props)
+  console.log('3 mode: ', mode)
 
   return (
     <article className='appointment'>

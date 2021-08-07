@@ -6,7 +6,7 @@ const useApplicationData = () => {
     day: 'Monday',
     days: [],
     appointments: {},
-    interviewers: [],
+    interviewers: {},
   });
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const useApplicationData = () => {
     });
   };
 
-  function bookInterview(id, interview) {
+  const bookInterview = (id, interview) => {
     // create the new appointments object using object copying/update pattern
     const appointment = {
       ...state.appointments[id],

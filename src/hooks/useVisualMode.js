@@ -1,15 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const useVisualMode = (initial) => {
-  const [mode, setMode] = useState(initial);
+  console.log('1.1 initial: ', initial)
+  
   const [history, setHistory] = useState([initial]);
+  console.log('1.2 history', history);
 
   // add a mode to the history stack
   const transition = (newMode, replace = false) => {
     // if replace is 'true' replace the last mode with the newMode instead of adding the newMode to the history
     if (replace) {
       return setHistory((prev) => {
-        return prev.map((element, index) => (index === prev.length - 1 ? newMode : element));
+        return [...prev.slice(0, prev.length - 1), newMode]
       });
     }
     return setHistory((prev) => [...prev, newMode]);
@@ -17,14 +19,13 @@ const useVisualMode = (initial) => {
 
   // update history stack without the previous mode
   const back = () => {
-    if (history.length === 1) {
+    if (history.length < 2) {
       return;
     }
     setHistory((prev) => prev.slice(0, prev.length - 1));
   };
 
-  // set the mode based on change to the history state
-  useEffect(() => setMode(history[history.length - 1]), [history]);
+  const mode = history[history.length - 1]
 
   return { mode, transition, back };
 };

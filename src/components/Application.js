@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 
 import 'components/Application.scss';
 
@@ -13,25 +12,22 @@ export default function Application() {
   
   const { state, setDay, bookInterview, cancelInterview } = useApplicationData();
 
+  // console.log(state)
+
   const dailyInterviewers = getInterviewersForDay(state, state.day);
 
-  const appointmentList = getAppointmentsForDay(state, state.day).map((element, index, array) => {
-    // check if current element is the last one in the array
-    return index === array.length - 1 ? (
+  console.log('day: ', state.day)
+  console.log('get appt for day: ', getAppointmentsForDay(state, state.day));
+  
+  const appointments = getAppointmentsForDay(state, state.day);
+
+  const appointmentList = appointments.map((appointment, index) => {
+    console.log('individual appt passed: ', appointment)
+    return (
       <Appointment
-        key='last'
-        id='last'
-        time={element.time}
-        interview={getInterview(state, element.interview)}
-        interviewers={dailyInterviewers}
-        bookInterview={bookInterview}
-        cancelInterview={cancelInterview}
-      />
-    ) : (
-      <Appointment
-        key={index}
-        {...element}
-        interview={getInterview(state, element.interview)}
+        key={appointment.id}
+        {...appointment}
+        interview={getInterview(state, appointment.interview)}
         interviewers={dailyInterviewers}
         bookInterview={bookInterview}
         cancelInterview={cancelInterview}
@@ -57,6 +53,7 @@ export default function Application() {
 
       <section className='schedule'>
         {appointmentList}
+        <Appointment id='last' time='5pm'/>
       </section>
       
     </main>
