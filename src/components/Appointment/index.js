@@ -52,7 +52,7 @@ const Appointment = (props) => {
   };
 
   return (
-    <article className='appointment'>
+    <article data-testid='appointment' className='appointment'>
       <Header time={props.time} />
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {mode === SHOW && (
@@ -65,11 +65,21 @@ const Appointment = (props) => {
           }}
         />
       )}
-      {mode === CREATE && <Form interviewers={props.interviewers} onCancel={back} onSave={save} />}
+      {mode === CREATE && (
+        <Form interviewers={props.interviewers} onCancel={back} onSave={save} />
+      )}
       {mode === SAVING && <Status message={'Saving'} />}
       {mode === DELETING && <Status message={'Deleting'} />}
-      {mode === CONFIRM && <Confirm onConfirm={deleteAppointment} onDelete={back} message={'Are you sure you would like to delete'} />}
-      {mode === ERROR_DELETE && <Error message={'Could not delete'} onClose={back} />}
+      {mode === CONFIRM && (
+        <Confirm
+          onConfirm={deleteAppointment}
+          onDelete={back}
+          message={'Are you sure you would like to delete'}
+        />
+      )}
+      {mode === ERROR_DELETE && (
+        <Error message={'Could not delete'} onClose={back} />
+      )}
       {mode === EDIT && (
         <Form
           interviewers={props.interviewers}

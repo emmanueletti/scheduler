@@ -10,13 +10,15 @@ const DayList = (props) => {
 
   // create array of individual daylistitems with passed in data from parent
   const days = props.days.map((day) => {
-    return <DayListItem 
-              key={day.id} 
-              name={day.name} 
-              spots={day.spots} 
-              setDay={setDay} 
-              selected={day.name === selectedDay} 
-            />;
+    return (
+      <DayListItem
+        key={day.id}
+        name={day.name}
+        spots={day.spots}
+        setDay={setDay}
+        selected={day.name === selectedDay}
+      />
+    );
   });
 
   return <ul>{days}</ul>;

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getAppointmentsForDay, getInterview } from 'helpers/selectors';
+import { getAppointmentsForDay } from 'helpers/selectors';
 import { useEffect, useReducer } from 'react';
 
 // globally available actions lookup
