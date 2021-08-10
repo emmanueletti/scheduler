@@ -1,8 +1,6 @@
 import React from 'react';
 
-// CSS
 import 'components/Appointment/styles.scss';
-
 import Header from 'components/Appointment/Header';
 import Show from './Show';
 import Empty from './Empty';
@@ -13,47 +11,45 @@ import Confirm from './Confirm';
 import Error from './Error';
 
 const Appointment = (props) => {
-
   const EMPTY = 'EMPTY';
   const SHOW = 'SHOW';
   const CREATE = 'CREATE';
   const SAVING = 'SAVING';
-  const DELETING = 'DELETING'
-  const CONFIRM = 'CONFIRM'
-  const EDIT = 'EDIT'
-  const ERROR_DELETE = 'ERROR_DELETE'
-  const ERROR_SAVE = 'ERROR_SAVE'
+  const DELETING = 'DELETING';
+  const CONFIRM = 'CONFIRM';
+  const EDIT = 'EDIT';
+  const ERROR_DELETE = 'ERROR_DELETE';
+  const ERROR_SAVE = 'ERROR_SAVE';
 
-  console.log('1', props.interview)
   const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY);
 
-  
   function save(name, interviewer) {
     const interview = {
       student: name,
       interviewer,
     };
-    
+
     transition(SAVING);
 
-    props.bookInterview(props.id, interview)
+    props
+      .bookInterview(props.id, interview)
       .then(() => transition(SHOW))
       .catch(() => transition(ERROR_SAVE, true))
+      .finally(() => props.updateSpots());
   }
 
   const deleteAppointment = () => {
-    transition(DELETING, true)
-    props.cancelInterview(props.id)
+    transition(DELETING, true);
+    props
+      .cancelInterview(props.id)
       .then(() => transition(EMPTY))
       .catch(() => transition(ERROR_DELETE, true))
-  }
+      .finally(() => props.updateSpots());
+  };
 
   const confirm = () => {
-    transition(CONFIRM)
-  }
-
-  console.log('2 appointment: ', props)
-  console.log('3 mode: ', mode)
+    transition(CONFIRM);
+  };
 
   return (
     <article className='appointment'>
@@ -83,7 +79,7 @@ const Appointment = (props) => {
           interviewer={props.interview.interviewer.id}
         />
       )}
-      {mode === ERROR_SAVE && <Error message={'Could not edit'} onClose={back}/>}
+      {mode === ERROR_SAVE && <Error message={'Could not edit'} onClose={back} />}
     </article>
   );
 };

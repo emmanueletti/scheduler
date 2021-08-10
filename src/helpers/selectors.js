@@ -29,6 +29,7 @@ const getInterview = (state, interview) => {
 
 const getInterviewersForDay = (state, day) => {
 
+  // console.log('state.days: ',state.days)
   const selectedDay = state.days.filter((element) => element.name === day);
 
   if (!selectedDay.length) return selectedDay;
