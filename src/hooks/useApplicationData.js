@@ -13,6 +13,7 @@ const ACTIONS = {
 
 const useApplicationData = () => {
   // object lookup instead of switch statements
+
   const reducers = {
     [ACTIONS.SET_STATE]: (state, action) => {
       const { days, appointments, interviewers } = action.payload;

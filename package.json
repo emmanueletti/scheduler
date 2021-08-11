@@ -6,6 +6,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
+    "eslint-config-airbnb": "^18.2.1",
     "normalize.css": "^8.0.1",
     "react": "^16.14.0",
     "react-dom": "^16.9.0",
@@ -44,6 +45,8 @@
     "@testing-library/react": "^8.0.7",
     "@testing-library/react-hooks": "^7.0.1",
     "babel-loader": "^8.0.5",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
     "node-sass": "^4.14.0",
     "prop-types": "^15.7.2",
     "react-test-renderer": "^16.14.0"
@@ -52,6 +55,10 @@
     "watchPathIgnorePatterns": [
       "<rootDir>/node_modules/",
       "<rootDir>/.git/"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js"
     ]
   },
   "proxy": "http://localhost:8001"
