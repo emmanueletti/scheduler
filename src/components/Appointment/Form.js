@@ -3,13 +3,6 @@ import React, { useState } from 'react';
 import InterviewerList from 'components/InterviewerList';
 import Button from 'components/Button';
 
-/*
-PROPS
-- interviewers: Array
-- interview: String
-- onCancel: Function Reference (originating from Application)
-- onSave: Function Reference (originating from Application)
-*/
 const Form = (props) => {
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   // check if props.name is already set
@@ -46,7 +39,10 @@ const Form = (props) => {
   return (
     <main className='appointment__card appointment__card--create'>
       <section className='appointment__card-left'>
-        <form onSubmit={handleSubmit} autoComplete='off' data-testid='appointment-form'>
+        <form
+          onSubmit={handleSubmit}
+          autoComplete='off'
+          data-testid='appointment-form'>
           <input
             className='appointment__create-input text--semi-bold'
             name={'name'}
@@ -57,7 +53,11 @@ const Form = (props) => {
             data-testid='student-name-input'
           />
           <section className='appointment__validation'>{error}</section>
-          <InterviewerList interviewers={props.interviewers} value={interviewer} onChange={setInterviewer} />
+          <InterviewerList
+            interviewers={props.interviewers}
+            value={interviewer}
+            onChange={setInterviewer}
+          />
         </form>
       </section>
       <section className='appointment__card-right'>

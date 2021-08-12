@@ -10,12 +10,13 @@ import {
 } from '../helpers/selectors';
 import useApplicationData from 'hooks/useApplicationData';
 
-export default function Application() {
+const Application = () => {
+  // useApplication custom hook
   const { state, setDay, bookInterview, cancelInterview, updateSpots } =
     useApplicationData();
 
+  // selector fn's used to transform data into component ready format
   const dailyInterviewers = getInterviewersForDay(state, state.day);
-
   const appointments = getAppointmentsForDay(state, state.day);
 
   const appointmentList = appointments.map((appointment) => {
@@ -57,4 +58,6 @@ export default function Application() {
       </section>
     </main>
   );
-}
+};
+
+export default Application;

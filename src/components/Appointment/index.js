@@ -21,7 +21,10 @@ const Appointment = (props) => {
   const ERROR_DELETE = 'ERROR_DELETE';
   const ERROR_SAVE = 'ERROR_SAVE';
 
-  const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY);
+  // custom hook to manage the visual state of the appointment
+  const { mode, transition, back } = useVisualMode(
+    props.interview ? SHOW : EMPTY
+  );
 
   function save(name, interviewer) {
     const interview = {
@@ -65,7 +68,9 @@ const Appointment = (props) => {
           }}
         />
       )}
-      {mode === CREATE && <Form interviewers={props.interviewers} onCancel={back} onSave={save} />}
+      {mode === CREATE && (
+        <Form interviewers={props.interviewers} onCancel={back} onSave={save} />
+      )}
       {mode === SAVING && <Status message={'Saving'} />}
       {mode === DELETING && <Status message={'Deleting'} />}
       {mode === CONFIRM && (
@@ -75,7 +80,9 @@ const Appointment = (props) => {
           message={'Are you sure you would like to delete'}
         />
       )}
-      {mode === ERROR_DELETE && <Error message={'Could not delete'} onClose={back} />}
+      {mode === ERROR_DELETE && (
+        <Error message={'Could not delete'} onClose={back} />
+      )}
       {mode === EDIT && (
         <Form
           interviewers={props.interviewers}
@@ -85,7 +92,9 @@ const Appointment = (props) => {
           interviewer={props.interview.interviewer.id}
         />
       )}
-      {mode === ERROR_SAVE && <Error message={'Could not edit'} onClose={back} />}
+      {mode === ERROR_SAVE && (
+        <Error message={'Could not edit'} onClose={back} />
+      )}
     </article>
   );
 };

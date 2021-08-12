@@ -13,7 +13,6 @@ const ACTIONS = {
 
 const useApplicationData = () => {
   // object lookup instead of switch statements
-
   const reducers = {
     [ACTIONS.SET_STATE]: (state, action) => {
       const { days, appointments, interviewers } = action.payload;
@@ -35,8 +34,6 @@ const useApplicationData = () => {
       return { ...state, appointments };
     },
 
-    // main logic inside reduce function to prevent issue when previosuly using useState of stale state values being use
-    // not sure if will be an issue with userReduce but putting it inside reduce function just in case
     [ACTIONS.UPDATE_SPOTS]: (state, action) => {
       // attach appointment objects to thier respective id's in state.day
       const appointments = getAppointmentsForDay(state, state.day);
@@ -87,22 +84,26 @@ const useApplicationData = () => {
     const fetchDays = axios.get('/api/days');
     const fetchAppointments = axios.get('/api/appointments');
     const fetchInterviewers = axios.get('/api/interviewers');
-    Promise.all([fetchDays, fetchAppointments, fetchInterviewers]).then((all) => {
-      const [days, appointments, interviewers] = all;
+    Promise.all([fetchDays, fetchAppointments, fetchInterviewers]).then(
+      (all) => {
+        const [days, appointments, interviewers] = all;
 
-      dispatch({
-        type: ACTIONS.SET_STATE,
-        payload: {
-          days: days.data,
-          appointments: appointments.data,
-          interviewers: interviewers.data,
-        },
-      });
-    });
-
-    // empty array as useEffect dependency means useEffect will run only once on initial render
+        dispatch({
+          type: ACTIONS.SET_STATE,
+          payload: {
+            days: days.data,
+            appointments: appointments.data,
+            interviewers: interviewers.data,
+          },
+        });
+      }
+    );
   }, []);
 
+  /**
+   * Function sets the state with a given day string
+   * @param {String} day
+   */
   const setDay = (day) => {
     dispatch({ type: ACTIONS.SET_DAY, payload: { day } });
   };
@@ -111,6 +112,13 @@ const useApplicationData = () => {
     dispatch({ type: ACTIONS.UPDATE_SPOTS });
   };
 
+  /**
+   * Function adds a created appointment to state
+   * and makes a PUT request to the backend to add the newly created appointment
+   * @param {Number} id - id of an appointment slot
+   * @param {Object} interview - Interview object containing id of the interviewer and student name
+   * @returns {Promise} A promise for an ajax PUT request
+   */
   const bookInterview = (id, interview) => {
     // immutably create copies of the new appointments object using object copying/update pattern
     const appointment = {
@@ -129,6 +137,12 @@ const useApplicationData = () => {
     });
   };
 
+  /**
+   * Function deletes an appointment from state
+   * and creates a DELETE ajax request to the backend
+   * @param {Number} id - The id of an appointment slot
+   * @returns {Promise} A promise for an ajax DELETE request
+   */
   const cancelInterview = (id) => {
     // build update for local state
     const appointments = {

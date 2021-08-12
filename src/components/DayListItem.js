@@ -3,17 +3,17 @@ import cn from 'classnames';
 
 import 'components/DayListItem.scss';
 
-export default function DayListItem(props) {
+export default function DayListItem({ spots, selected, name, setDay }) {
   // dynamic class names based on props passed down
   const dayClass = cn('day-list__item', {
-    'day-list__item--full': props.spots === 0,
-    'day-list__item--selected': props.selected,
+    'day-list__item--full': spots === 0,
+    'day-list__item--selected': selected,
   });
 
   // event handler to change parent state
   const onClickHandler = () => {
-    if (props.spots !== 0) {
-      props.setDay(props.name);
+    if (spots !== 0) {
+      setDay(name);
     }
   };
 
@@ -30,8 +30,8 @@ export default function DayListItem(props) {
 
   return (
     <li data-testid='day' className={dayClass} onClick={onClickHandler}>
-      <h2 className='text--regular'>{props.name}</h2>
-      <h3 className='text--light'>{formatSpots(props.spots)}</h3>
+      <h2 className='text--regular'>{name}</h2>
+      <h3 className='text--light'>{formatSpots(spots)}</h3>
     </li>
   );
 }
