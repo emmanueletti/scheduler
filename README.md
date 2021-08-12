@@ -20,12 +20,11 @@ A single page application React application that allows students to book and can
 
 - Fork and clone project
 - Install all dependencies
+- [Instructions to set up the backend API](https://github.com/emmanueletti/scheduler-api)
 
 ```bash
 npm install
 ```
-
-- Start up the
 
 ## Running Webpack Development Server
 
