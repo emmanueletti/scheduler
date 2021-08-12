@@ -4,9 +4,15 @@ A single page application React application that allows students to book and can
 
 ## Project Screenshots
 
+### Main Dashboard
+
 <img src ='https://github.com/emmanueletti/scheduler/blob/master/docs/scheduler%20-%20main.png'>
 
+### Creating a new appointment
+
 <img src='https://github.com/emmanueletti/scheduler/blob/master/docs/%20scheduler%20-%20create.png'>
+
+### Deleting an appointment
 
 <img src='https://github.com/emmanueletti/scheduler/blob/master/docs/scheduler%20-%20delete.png'>
 
