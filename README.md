@@ -18,9 +18,9 @@ A single page React application that allows students to book and cancel intervie
 
 ## Getting Started
 
-- Fork and clone project
-- Install all dependencies
 - [Instructions to set up the backend API](https://github.com/emmanueletti/scheduler-api)
+- Git clone the project
+- Install all dependencies
 
 ```bash
 npm install
